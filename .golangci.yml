@@ -1,0 +1,50 @@
+run:
+  skip-dirs:
+    - db/models
+  timeout: 5m
+
+output:
+  sort-results: true
+
+linters-settings:
+  gocritic:
+    disabled-checks:
+      - singleCaseSwitch
+      - elseif
+
+linters:
+  enable:
+    - bodyclose
+    - durationcheck
+    - forbidigo
+    - gofumpt
+    - goimports
+    - gosec
+    - gocritic
+    - ifshort
+    - importas
+    - misspell
+    - noctx
+    - prealloc
+    - rowserrcheck
+    - sqlclosecheck
+    - unconvert
+    - paralleltest
+    - exportloopref
+    - scopelint
+  disable:
+    # already taken care of by gofumpt
+    - whitespace
+    # not useful
+    - unparam
+    - dogsled
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+  exclude-rules:
+    # False positive: https://github.com/kunwardeep/paralleltest/issues/8.
+    - linters:
+        - paralleltest
+      text: "does not use range value in test Run"
